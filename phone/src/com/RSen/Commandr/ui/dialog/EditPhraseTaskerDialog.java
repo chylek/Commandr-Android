@@ -3,6 +3,7 @@ package com.RSen.Commandr.ui.dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -24,17 +25,25 @@ public class EditPhraseTaskerDialog {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         input.setLayoutParams(lp);
+        final CheckBox isRegex = new CheckBox(context);
+        isRegex.setText(context.getString(R.string.regex));
+        isRegex.setChecked(command.isRegex);
+        LinearLayout ll = new LinearLayout(context);
+        ll.addView(input);
+        ll.addView(isRegex);
+        ll.setLayoutParams(lp);
+        ll.setOrientation(LinearLayout.VERTICAL);
         new MaterialDialog.Builder((Activity) context)
                 .title(command.taskerCommandName)
-                .content("Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.")
                 .theme(Theme.LIGHT)  // the default is light, so you don't need this line
-                .customView(input)
+                .customView(ll)
                 .positiveText(R.string.set)  // the default is 'OK'
                 .callback(new MaterialDialog.SimpleCallback() {
                     @Override
                     public void onPositive(MaterialDialog materialDialog) {
 
                         command.activationName = input.getText().toString();
+                        command.isRegex = isRegex.isChecked();
                         TaskerCommands.save(context);
                         card.refreshCard(command);
                     }

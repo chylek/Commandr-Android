@@ -58,7 +58,7 @@ public final class QueryReceiver extends BroadcastReceiver {
                     boolean commandFound = false;
                     String phraseResult = "";
                     ArrayList<String> regexResult = null;
-                    if (!isRegex) { //todo: doplnit reakci na regex, join to utils
+                    if (!isRegex) {
                         phraseResult = ActivationCheck.phraseActivation(lastPhrase, searchPhrase.trim().toLowerCase());
                         if (phraseResult != null){
                             commandFound = true;

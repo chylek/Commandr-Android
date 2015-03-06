@@ -185,7 +185,7 @@ public class TaskerCommands {
                             GoogleNowUtil.resetGoogleNow(context);
                         }
                         Bundle resultBundle = new Bundle();
-                        resultBundle.putString("phraseResult",phraseResult);
+                        resultBundle.putString("interceptedCommand",interceptedCommand);
                         resultBundle.putStringArrayList("regexResult",regexResult);
                         Message m = Message.obtain();
                         m.setData(resultBundle);
@@ -193,11 +193,11 @@ public class TaskerCommands {
                             @Override
                             public boolean handleMessage(Message message) {
                                 Bundle data = message.getData();
-                                cmd.execute(context, data.getString("phraseResult"),data.getStringArrayList("regexResult"));
+                                cmd.execute(context, data.getString("interceptedCommand"),data.getStringArrayList("regexResult"));
                                 return true;
                             }
                         });
-                        handler.sendEmptyMessageDelayed(0, 2000);
+                        handler.sendMessageDelayed(m,1000);
                         commandExecuted = true;
                     }
 

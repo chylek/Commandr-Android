@@ -37,6 +37,7 @@ public class TaskerCommand extends Command implements Serializable {
      * Default constructor
      *
      * @param activationName    The command phrase that activates the command
+     * @param isRegex           True if the command phrase is in form of regular expression
      * @param taskerCommandName The Tasker command name.
      */
     public TaskerCommand(String activationName, boolean isRegex,String taskerCommandName) {
